@@ -435,6 +435,7 @@ export class CanvasRenderer {
 
   private button(rect: { x: number; y: number; width: number; height: number }, label: string): void {
     const context = this.context;
+    context.fillStyle = '#0d1532a8';
     context.beginPath();
     context.roundRect(rect.x, rect.y, Math.max(0, rect.width), rect.height, 8);
     context.fill();
