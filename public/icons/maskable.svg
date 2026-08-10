@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Alien Artillery">
+  <rect width="512" height="512" fill="#0d1220"/>
+  <circle cx="256" cy="250" r="136" fill="#50d6c7"/>
+  <path d="M154 190 118 122M358 190l36-68" stroke="#a8f06d" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="204" cy="238" r="30" fill="#0d1220"/>
+  <circle cx="308" cy="238" r="30" fill="#0d1220"/>
+  <circle cx="204" cy="238" r="11" fill="#fff"/>
+  <circle cx="308" cy="238" r="11" fill="#fff"/>
+  <path d="M180 320c42 29 110 29 152 0" fill="none" stroke="#0d1220" stroke-width="22" stroke-linecap="round"/>
+  <path d="M120 408h272" stroke="#ff8976" stroke-width="36" stroke-linecap="round"/>
+</svg>
