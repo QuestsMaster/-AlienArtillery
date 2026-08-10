@@ -70,6 +70,15 @@ body,
   border-color: #ffd36e;
 }
 
+#hud.terminal-actions {
+  justify-content: center;
+}
+
+#hud.terminal-actions button {
+  padding: 0.35rem 1rem;
+  font-weight: 700;
+}
+
 #offline-status {
   top: max(0.5rem, env(safe-area-inset-top));
   right: max(0.5rem, env(safe-area-inset-right));
