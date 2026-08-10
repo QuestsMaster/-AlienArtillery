@@ -1,1 +1,5 @@
-worktrees/
+.worktrees/
+.superpowers/
+.tools/
+node_modules/
+dist/
