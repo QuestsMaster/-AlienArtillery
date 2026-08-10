@@ -1,8 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { CanvasRenderer, recoveryHudTop, rosterLayout } from '../../src/ui/renderer';
+import { terminalActionFor } from '../../src/ui/terminal-actions';
 import { matchFixture } from '../helpers/fixtures';
 
 describe('CanvasRenderer effects', () => {
+  it('offers a new match only after the winner screen appears', () => {
+    expect(terminalActionFor('ready')).toBeNull();
+    expect(terminalActionFor('aiming')).toBeNull();
+    expect(terminalActionFor('complete')).toEqual({ label: 'Новый матч' });
+  });
+
   it('resets the button fill before drawing every touch control', () => {
     const { canvas, calls } = recordingCanvas();
     const renderer = new CanvasRenderer(canvas);
