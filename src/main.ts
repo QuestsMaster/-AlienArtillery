@@ -3,6 +3,7 @@ import { GameController } from './game/game';
 import { MatchRepository } from './game/storage';
 import { TouchControls } from './ui/controls';
 import { CanvasRenderer, recoveryHudTop } from './ui/renderer';
+import { terminalActionFor } from './ui/terminal-actions';
 import { installViewportTracking, viewportFor } from './ui/viewport';
 import { registerPwa } from './pwa/register';
 
@@ -64,7 +65,10 @@ let lastFrame = performance.now();
 function frame(now: number): void {
   const elapsedSeconds = Math.max(0, (now - lastFrame) / 1000);
   lastFrame = now;
-  void controller.tick(elapsedSeconds).then(() => controller.render());
+  void controller.tick(elapsedSeconds).then(() => {
+    controller.render();
+    syncTerminalAction();
+  });
   requestAnimationFrame(frame);
 }
 
@@ -123,6 +127,26 @@ function showStorageWarning(message: string): void {
     hudElement.replaceChildren();
   });
   hudElement.replaceChildren(document.createTextNode(message), dismiss);
+}
+
+function syncTerminalAction(): void {
+  const action = terminalActionFor(controller.state?.phase ?? 'ready');
+  if (action === null) {
+    if (hudElement.className === 'terminal-actions') {
+      hudElement.className = '';
+      hudElement.replaceChildren();
+    }
+    return;
+  }
+  if (hudElement.className === 'terminal-actions') return;
+
+  hudElement.className = 'terminal-actions';
+  hudElement.replaceChildren(recoveryButton(action.label, () => {
+    controller.startNewMatch(Date.now());
+    void controller.clearDamagedSave();
+    hudElement.className = '';
+    hudElement.replaceChildren();
+  }));
 }
 
 function recoveryButton(label: string, action: () => void): HTMLButtonElement {
