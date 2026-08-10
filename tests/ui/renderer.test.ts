@@ -3,6 +3,22 @@ import { CanvasRenderer, recoveryHudTop, rosterLayout } from '../../src/ui/rende
 import { matchFixture } from '../helpers/fixtures';
 
 describe('CanvasRenderer effects', () => {
+  it('resets the button fill before drawing every touch control', () => {
+    const { canvas, calls } = recordingCanvas();
+    const renderer = new CanvasRenderer(canvas);
+
+    renderer.render(
+      matchFixture(),
+      { width: 1, height: 1, bytes: new Uint8Array([0]) },
+      { center: { x: 800, y: 450 }, zoom: 1, viewport: { x: 844, y: 390 } },
+    );
+
+    const buttonFillResets = calls.filter(call =>
+      call.method === 'set:fillStyle' && call.args[0] === '#0d1532a8',
+    );
+    expect(buttonFillResets).toHaveLength(8);
+  });
+
   it('rebuilds the retained terrain canvas only when the snapshot identity changes', () => {
     const { canvas } = recordingCanvas();
     const offscreen = recordingCanvas();
@@ -178,7 +194,11 @@ function recordingCanvas(): { canvas: HTMLCanvasElement; calls: RecordedCall[] }
         return () => ({ addColorStop: () => undefined });
       }
       return (...args: unknown[]) => calls.push({ method: String(property), args });
-    },
+
+    set: (_target, property, value) => {
+      calls.push({ method: `set:${String(property)}`, args: [value] });
+      return true;
+    },    },
   });
   const canvas = {
     width: 0,
