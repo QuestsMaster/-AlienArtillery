@@ -1,0 +1,25 @@
+{
+  "name": "Alien Artillery",
+  "short_name": "Alien Artillery",
+  "description": "A turn-based artillery match for one player and a bounded computer opponent.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#0d1220",
+  "theme_color": "#0d1220",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
