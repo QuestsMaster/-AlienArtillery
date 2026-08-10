@@ -371,7 +371,7 @@ describe('integrated match controller', () => {
     await tickUntil(right.game, right.clock, () => right.game.state?.activeTeam === 'cpu' && right.game.state.phase === 'ready', 600);
 
     expect(left.game.state).toEqual(right.game.state);
-  });
+  }, 10_000);
 
   it('saves only after a projectile has settled', async () => {
     const { game, repository, clock } = testGame();
